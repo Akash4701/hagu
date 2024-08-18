@@ -17,6 +17,7 @@ export const SettingsSchema = z
     primarySkill:z.string().optional(),
     secondarySkills:z.string().optional(),
     country: z.string().optional(),
+    
     location: z.string().optional(),
     posts: z.array(z.string()).optional(),
     about:z.string(),
@@ -28,6 +29,7 @@ export const SettingsSchema = z
     profilePic: z.string().url({ message: "Invalid URL format" }).optional(),
     gender: UserGender.optional(),
     birthday: z.string().optional(),
+    linkedin: z.string().url({ message: "Invalid URL format" }).optional(),
   })
   .refine(
     (data) => {

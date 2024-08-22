@@ -86,6 +86,7 @@ export const UserInfo = ({ user }: UserInfoProps) => {
       </div>
       {!imageUrl && (
         <UploadButton<string|null, string>
+          className="text-white"
           endpoint="imageUploader" // Replace with your actual endpoint URL
           onClientUploadComplete={async (res) => {
             const newUrl = res[0].url;

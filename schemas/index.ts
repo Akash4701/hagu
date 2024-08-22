@@ -2,6 +2,21 @@ import { z } from "zod";
 
 const UserGender = z.enum(["male", "female", "others"]);
 
+export const project = z.object({
+  title : z.string(),
+  about : z.string(),   
+  techStack : z.string(),  
+  demovideo : z.string().url().optional(),    
+  collaborator : z.string().url().optional(),
+  liveLink : z.string().url().optional()   
+})
+
+export const experience = z.object({
+  company : z.string().optional(),   
+  duration : z.string().optional(),    
+  role : z.string().optional(),         
+})
+
 export const SettingsSchema = z
   .object({
     name: z.string().optional(),
@@ -14,22 +29,33 @@ export const SettingsSchema = z
       .string()
       .min(6, { message: "Minimum of 6 characters required for new password" })
       .optional(),
-    primarySkill:z.string().optional(),
-    secondarySkills:z.string().optional(),
-    country: z.string().optional(),
     
+    username: z.string().optional(),
+    
+    primarySkill:z.string().optional(),
+    secondarySkills: z.string().optional(),
+    country: z.string().optional(),
+    projects:z.array(project).optional(),
+    experience: z.array(experience).optional(),
     location: z.string().optional(),
     posts: z.array(z.string()).optional(),
     about:z.string(),
-    projects: z
-      .array(z.string().url({ message: "Invalid URL format" }))
-      .optional(),
-    institution: z.string().optional(),
-    study: z.string().optional(),
     profilePic: z.string().url({ message: "Invalid URL format" }).optional(),
     gender: UserGender.optional(),
     birthday: z.string().optional(),
     linkedin: z.string().url({ message: "Invalid URL format" }).optional(),
+    github  :  z.string().url({ message: "Invalid URL format" }).optional(),
+          
+    twitter:z.string().url({ message: "Invalid URL format" }).optional(),
+            
+    class10 : z.string().optional(),     
+    percentage_10:z.string().optional(),
+    class12    : z.string().optional(),  
+    percentage_12: z.string().optional(),
+    college   : z.string().optional(),   
+    currentYear : z.string().optional(), 
+    dept   : z.string().optional(),      
+    domain : z.string().optional()      
   })
   .refine(
     (data) => {
@@ -61,6 +87,8 @@ export const NewPasswordSchema = z.object({
     message: "Minimum of 6 characters required",
   }),
 });
+
+
 
 export const ResetSchema = z.object({
   email: z.string().email({
